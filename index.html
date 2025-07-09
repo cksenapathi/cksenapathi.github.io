@@ -7,11 +7,12 @@
   <title>Chinmay Senapathi</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* === Base Reset & Theme === */
+    /* === Base Theme === */
     :root {
       --neon-cyan: #00fff7;
       --neon-magenta: #ff00c8;
       --bg-dark: #0f0f0f;
+      --fade-time: 0.6s;
     }
 
     * {
@@ -25,6 +26,7 @@
       font-family: 'Orbitron', sans-serif;
       background: var(--bg-dark);
       color: var(--neon-cyan);
+      scroll-behavior: smooth;
     }
 
     body {
@@ -36,6 +38,8 @@
       /* Geometric grid background */
       background-image: radial-gradient(var(--neon-cyan) 0.5px, transparent 0.5px);
       background-size: 20px 20px;
+      background-attachment: fixed;
+      overflow-x: hidden;
     }
 
     /* === Typography === */
@@ -43,7 +47,7 @@
       font-size: clamp(2.25rem, 5vw, 3.5rem);
       text-align: center;
       text-shadow: 0 0 6px var(--neon-cyan), 0 0 12px var(--neon-cyan);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.35rem;
     }
 
     h2 {
@@ -55,35 +59,51 @@
     p {
       font-size: clamp(0.9rem, 2.5vw, 1rem);
       line-height: 1.6;
-      max-width: 60ch;
+      max-width: 65ch;
       margin-bottom: 1.25rem;
     }
 
-    /* === Layout Sections === */
+    /* === Sections === */
     .section {
       width: 100%;
       max-width: 900px;
       border-top: 1px solid var(--neon-cyan);
-      padding-top: 1.25rem;
-      margin-top: 1.25rem;
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity var(--fade-time) ease, transform var(--fade-time) ease;
+    }
+
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* === Social Links === */
-    .social-links {
+    nav {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
     }
 
-    .social-links a {
+    nav a {
+      position: relative;
       color: var(--neon-cyan);
       text-decoration: none;
-      transition: color 0.25s ease;
       font-size: 0.95rem;
+      transition: color 0.25s ease;
     }
 
-    .social-links a:hover {
-      color: var(--neon-magenta);
+    /* Pulse animation */
+    @keyframes pulse {
+      0%   { color: var(--neon-cyan); }
+      50%  { color: var(--neon-magenta); }
+      100% { color: var(--neon-cyan); }
+    }
+
+    nav a:hover {
+      animation: pulse 0.8s ease-in-out forwards;
     }
 
     /* === Responsive Tweaks === */
@@ -91,7 +111,6 @@
       body {
         background-size: 15px 15px;
       }
-
       .section {
         padding-left: 0.25rem;
         padding-right: 0.25rem;
@@ -101,40 +120,54 @@
 </head>
 
 <body>
-  <header>
+  <header class="section show" style="border-top:none; opacity:1; transform:none;">
     <h1>Chinmay Senapathi</h1>
-    <p>BS &amp; MS in Aerospace Engineering, UT Austin</p>
-    <p><em>Thesis:</em> Models of Self‑Organized Criticality for Open‑Ended Reinforcement Learning</p>
+    <p aria-label="Cyberpunk Greeting">💾 Welcome, wanderer.</p>
+    <p>BS &amp; MS in Aerospace Engineering, University&nbsp;of&nbsp;Texas&nbsp;at&nbsp;Austin.</p>
+    <p><em>Thesis:</em> <span style="white-space: nowrap;">Models of Self‑Organized Criticality for Open‑Ended Reinforcement Learning.</span></p>
   </header>
 
-  <section class="section" id="research">
-    <h2>Research Interests</h2>
-    <p>Complex systems, non‑equilibrium thermodynamics, decentralized computing, robotics, computational intelligence</p>
+  <section class="section" id="about">
+    <h2>About &amp; Research</h2>
+    <p>I tinker at the edge where complex systems whisper their secrets to silicon. My work explores how non‑equilibrium thermodynamics can guide decentralized computing and robotics toward true computational intelligence. Whether I’m mapping agent swarms or coaxing reinforcement learners into open‑ended discovery, I’m motivated by the question: <em>How do we engineer curiosity itself?</em></p>
   </section>
 
   <section class="section" id="hobbies">
     <h2>Hobbies</h2>
-    <p>Martial arts, Civilization VI, guitar</p>
+    <p>When I power down the lab servers, you’ll find me trading judo throws, conquering continents in Civilization&nbsp;VI, or riffing on my guitar until the strings glow as bright as a neon skyline.</p>
   </section>
 
   <section class="section" id="connect">
     <h2>Connect</h2>
-    <div class="social-links">
-      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://chinmaysenapathi.substack.com" target="_blank" rel="noopener">Substack</a>
-      <a href="https://twitter.com/" target="_blank" rel="noopener">Twitter</a>
-      <a href="https://linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
+    <nav aria-label="Social links">
+      <a href="https://github.com/cksenapathi" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+      <a href="https://cksenapathi.substack.com/" target="_blank" rel="noopener" aria-label="Substack">Substack</a>
+      <a href="https://x.com/cksenapathi" target="_blank" rel="noopener" aria-label="Twitter (X)">Twitter</a>
+      <a href="www.linkedin.com/in/chinmaysenapathi" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+    </nav>
   </section>
 
   <script>
-    /* Parallax‑like subtle grid drift */
+    /* === Parallax Grid Drift === */
     const body = document.body;
     body.addEventListener('mousemove', ({ clientX, clientY }) => {
-      body.style.backgroundPosition = `${clientX / 15}px ${clientY / 15}px`;
+      body.style.backgroundPosition = `${clientX / 30}px ${clientY / 30}px`;
+    });
+
+    /* === Fade‑in on Scroll (IntersectionObserver) === */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.section').forEach(section => {
+      if (!section.classList.contains('show')) observer.observe(section);
     });
   </script>
 </body>
 
 </html>
-
