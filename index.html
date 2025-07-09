@@ -1,1 +1,140 @@
-Chinmay Senapathi
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chinmay Senapathi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* === Base Reset & Theme === */
+    :root {
+      --neon-cyan: #00fff7;
+      --neon-magenta: #ff00c8;
+      --bg-dark: #0f0f0f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Orbitron', sans-serif;
+      background: var(--bg-dark);
+      color: var(--neon-cyan);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: clamp(1rem, 4vw, 2rem);
+      /* Geometric grid background */
+      background-image: radial-gradient(var(--neon-cyan) 0.5px, transparent 0.5px);
+      background-size: 20px 20px;
+    }
+
+    /* === Typography === */
+    h1 {
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      text-align: center;
+      text-shadow: 0 0 6px var(--neon-cyan), 0 0 12px var(--neon-cyan);
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+      margin-bottom: 0.75rem;
+      text-shadow: 0 0 4px var(--neon-cyan);
+    }
+
+    p {
+      font-size: clamp(0.9rem, 2.5vw, 1rem);
+      line-height: 1.6;
+      max-width: 60ch;
+      margin-bottom: 1.25rem;
+    }
+
+    /* === Layout Sections === */
+    .section {
+      width: 100%;
+      max-width: 900px;
+      border-top: 1px solid var(--neon-cyan);
+      padding-top: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    /* === Social Links === */
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: var(--neon-cyan);
+      text-decoration: none;
+      transition: color 0.25s ease;
+      font-size: 0.95rem;
+    }
+
+    .social-links a:hover {
+      color: var(--neon-magenta);
+    }
+
+    /* === Responsive Tweaks === */
+    @media (max-width: 600px) {
+      body {
+        background-size: 15px 15px;
+      }
+
+      .section {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Chinmay Senapathi</h1>
+    <p>BS &amp; MS in Aerospace Engineering, UT Austin</p>
+    <p><em>Thesis:</em> Models of Self‑Organized Criticality for Open‑Ended Reinforcement Learning</p>
+  </header>
+
+  <section class="section" id="research">
+    <h2>Research Interests</h2>
+    <p>Complex systems, non‑equilibrium thermodynamics, decentralized computing, robotics, computational intelligence</p>
+  </section>
+
+  <section class="section" id="hobbies">
+    <h2>Hobbies</h2>
+    <p>Martial arts, Civilization VI, guitar</p>
+  </section>
+
+  <section class="section" id="connect">
+    <h2>Connect</h2>
+    <div class="social-links">
+      <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://chinmaysenapathi.substack.com" target="_blank" rel="noopener">Substack</a>
+      <a href="https://twitter.com/" target="_blank" rel="noopener">Twitter</a>
+      <a href="https://linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </section>
+
+  <script>
+    /* Parallax‑like subtle grid drift */
+    const body = document.body;
+    body.addEventListener('mousemove', ({ clientX, clientY }) => {
+      body.style.backgroundPosition = `${clientX / 15}px ${clientY / 15}px`;
+    });
+  </script>
+</body>
+
+</html>
+
